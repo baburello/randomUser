@@ -8,7 +8,16 @@ const clearBtn = document.getElementById('clear__button')
 
 formButton.addEventListener('click', (e) => {
     e.preventDefault()
-    reload( )
+    reload()
+    clearBtn.classList.remove('hidden');
+})
+
+//clearBtn
+
+clearBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    user.innerHTML = ''
+    clearBtn.classList.add('hidden');
 })
 
 
