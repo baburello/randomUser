@@ -25,10 +25,10 @@ const getData = (resourse) => {
                 loaderToggle(true)
             } else if (request.readyState == 4 && request.status == 200) {
                 const data = JSON.parse(request.responseText)
-                console.log(data)
+                resolve(data.results)
                 loaderToggle(false)
             } else if (request.readyState == 4) {
-                console.log("error")
+                reject("error")
                 loaderToggle(false)
             }
         })
@@ -38,4 +38,14 @@ const getData = (resourse) => {
     })
 }
 
-getData(API)
+//Load
+const reload = () => {
+    getData(API)
+        .then((data) => {
+        updateUI(data)
+        }).catch((err) => {
+        console.log(err)
+    })
+}
+
+document.addEventListener('DOMContentLoaded', reload)
