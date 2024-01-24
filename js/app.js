@@ -1,33 +1,48 @@
-const form = document.getElementById('form')
-const formButton = document.getElementById('form__button')
-const user = document.getElementById('user')
-const deleteBtn = document.getElementById('delete__btn')
-const clearBtn = document.getElementById('clear__button')
+const form = document.getElementById("form");
+const formButton = document.getElementById("form__button");
+const user = document.getElementById("user");
+const deleteBtn = document.getElementById("delete__btn");
+const clearBtn = document.getElementById("clear__button");
+const userName = document.querySelector(".user__name");
 
 //refresh
 
-formButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    reload()
-    clearBtn.classList.remove('hidden');
-})
+formButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    reload();
+    clearBtn.classList.remove("hidden");
+});
 
-//clearBtn
+//clear
 
-clearBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    user.innerHTML = ''
-    clearBtn.classList.add('hidden');
-})
+clearBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    user.innerHTML = "";
+    clearBtn.classList.add("hidden");
+});
 
+//search
+form["form__input"].addEventListener("input", () => {
+    const inputValue = form["form__input"].value.toLowerCase();
+    const name = document.querySelectorAll(".user__name");
+    name.forEach((item) => {
+        if (
+            (item.lastElementChild.textContent.toLowerCase().includes(inputValue))
+        ) {
+            item.parentElement.classList.remove("hidden");
+        } else {
+            item.parentElement.classList.add("hidden");
+        }
+    });
+});
 
 //get result and update UI
 
-const updateUI = (data)=>{
-    user.innerHTML = ''
+const updateUI = (data) => {
+    user.innerHTML = "";
     data.forEach((item) => {
-        const { gender, name, picture, location, dob } = item
-        
+        const { gender, name, picture, location, dob } = item;
+
         user.innerHTML += `
         <li class="user__item">
         <button id="delete__btn" class="user__delete--btn">
@@ -58,9 +73,9 @@ const updateUI = (data)=>{
         </div>
       </li>
      
-        `
-    })
-}
+        `;
+    });
+};
 
 /*
  <li class="user__item">
@@ -288,4 +303,3 @@ const updateUI = (data)=>{
         </div>
       </li>
 */
-
